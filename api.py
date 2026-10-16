@@ -9,6 +9,7 @@ app.add_middleware(
     allow_origins=[
         "http://127.0.0.1:8080",
         "http://localhost:8080",
+        "https://zentra-ai-frontend.vercel.app",
     ],
     allow_credentials=False,
     allow_methods=["GET", "POST"],
@@ -25,14 +26,13 @@ def home():
     return {
         "name": "ZENTRA AI",
         "status": "online",
-        "version": "0.3"
+        "version": "0.3",
     }
 
 
 @app.post("/chat")
 def chat(request: ChatRequest):
-    message = request.message.strip().lower()
-    message = message.rstrip("!.,?")
+    message = request.message.strip().lower().rstrip("!.,?")
 
     if message in ["hello", "hi", "hey"]:
         reply = "Hello, developer! ZENTRA AI is online! ⚡"
